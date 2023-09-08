@@ -1,11 +1,13 @@
 package macaroni.orders.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import macaroni.orders.controller.model.MacaroniOrdersCustomerData;
@@ -14,6 +16,7 @@ import macaroni.orders.dao.CheeseDao;
 import macaroni.orders.dao.CustomerDao;
 import macaroni.orders.dao.MacaroniOrdersDao;
 import macaroni.orders.entity.Customer;
+import macaroni.orders.entity.MacaroniOrders;
 
 @Service
 @Slf4j
@@ -28,25 +31,42 @@ public class MacaroniOrdersService {
 	@Autowired
 	private CustomerDao customerDao;
 
-	public List<MacaroniOrdersData> retrieveAllMacaroniOrders;
-
+	
 	public MacaroniOrdersData saveMacaroniOrders(MacaroniOrdersData macaroniOrdersData) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Transactional(readOnly = true)
 	public List<MacaroniOrdersData> retrieveAllMacaroniOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		List<MacaroniOrders> macaroniorders = macaroniOrdersDao.findAll();
+		List<MacaroniOrdersData> result = new LinkedList<>();
+		
+		for(MacaroniOrders macaroniOrders : macaroniorders) {
+			MacaroniOrdersData mod = new MacaroniOrdersData(macaroniOrders);
+	
+			
+			mod.getCheeses().clear();
+			mod.getCustomers().clear();
+
+		}
+		return result;		
+}
+
+	@Transactional
+	public MacaroniOrdersData retrieveMacaroniOrdersById(Long macaroniOrdersId) {
+		MacaroniOrders macaroniorders = findMacaroniOrdersById(macaroniOrdersId);
+		return new MacaroniOrdersData(macaroniorders);
 	}
 
-	public MacaroniOrdersData retrieveMacaroniOrdersById(Long macaroniOrdersId) {
+	private MacaroniOrders findMacaroniOrdersById(Long macaroniOrdersId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public void deleteMacaroniOrdersById(Long macaroniOrdersId) {
-		// TODO Auto-generated method stub
+		MacaroniOrders macaroniOrders = findMacaroniOrdersById(macaroniOrdersId);
+		macaroniOrdersDao.delete(macaroniOrders);
 	}
 	
 	/**
