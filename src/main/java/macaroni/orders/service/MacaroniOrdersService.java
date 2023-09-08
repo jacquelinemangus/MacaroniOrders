@@ -60,10 +60,11 @@ public class MacaroniOrdersService {
 	}
 
 	private MacaroniOrders findMacaroniOrdersById(Long macaroniOrdersId) {
-		// TODO Auto-generated method stub
-		return null;
+		return macaroniOrdersDao.findById(macaroniOrdersId)
+				.orElseThrow(() -> new NoSuchElementException("Macaroni orders with ID=" + " does not exist."));
 	}
 
+	@Transactional(readOnly = false)
 	public void deleteMacaroniOrdersById(Long macaroniOrdersId) {
 		MacaroniOrders macaroniOrders = findMacaroniOrdersById(macaroniOrdersId);
 		macaroniOrdersDao.delete(macaroniOrders);
@@ -129,6 +130,11 @@ public class MacaroniOrdersService {
 		return customer;
 	}
 	
+	private MacaroniOrdersCustomerData copyCustomerFields(macaroni.orders.entity.Customer data) {
+		MacaroniOrdersCustomerData customerData = new MacaroniOrdersCustomerData(data);
+		return customerData;
+	}
+}
 	private MacaroniOrdersCustomerData copyCustomerFields(macaroni.orders.entity.Customer data) {
 		MacaroniOrdersCustomerData customerData = new MacaroniOrdersCustomerData(data);
 		return customerData;
