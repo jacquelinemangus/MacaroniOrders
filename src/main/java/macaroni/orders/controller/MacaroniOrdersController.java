@@ -42,7 +42,7 @@ public class MacaroniOrdersController {
 		return macaroniOrdersService.saveMacaroniOrders(macaroniOrdersData);
 	}
 
-	@GetMapping("/macaroniOrders")
+	@GetMapping("/allmacaroniOrders")
 	public List<MacaroniOrdersData> retrieveAllMacaroniOrders() {
 		log.info("Retrieve all macaroni orders called.");
 		return macaroniOrdersService.retrieveAllMacaroniOrders();
@@ -65,10 +65,29 @@ public class MacaroniOrdersController {
 	/**
 	 * BRW
 	 */
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/customer")
+//	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/customer")
+//	@ResponseStatus(code = HttpStatus.CREATED)
+//	public MacaroniOrdersCustomerData createCustomer(@RequestBody MacaroniOrdersCustomerData macaroniOrdersCustomerData) {
+//		log.info("Creating customer {}", macaroniOrdersCustomerData);
+//		return macaroniOrdersService.saveCustomer(macaroniOrdersCustomerData);
+//	}
+	
+	@PostMapping("/customer")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public MacaroniOrdersCustomerData createCustomer(@RequestBody MacaroniOrdersCustomerData macaroniOrdersCustomerData) {
 		log.info("Creating customer {}", macaroniOrdersCustomerData);
 		return macaroniOrdersService.saveCustomer(macaroniOrdersCustomerData);
 	}
+	
+	@PutMapping("/customer/{customerId}")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public MacaroniOrdersCustomerData updateCustomer(@PathVariable Long customerId, @RequestBody MacaroniOrdersCustomerData macaroniOrdersCustomerData) {
+		macaroniOrdersCustomerData.setCustomerId(customerId);
+		log.info("Creating customer {}", macaroniOrdersCustomerData);
+		return macaroniOrdersService.saveCustomer(macaroniOrdersCustomerData);
+	}
 }
+
+
+
+
