@@ -3,9 +3,9 @@ DROP TABLE IF EXISTS macaroni_orders;
 DROP TABLE IF EXISTS noodle_shape;
 DROP TABLE IF EXISTS cheese;
 DROP TABLE IF EXISTS customer;
+
 CREATE TABLE customer (
   customer_id INT AUTO_INCREMENT NOT NULL,
-  customer_order INT NOT NULL,
   customer_first_name VARCHAR(128) NOT NULL,
   customer_last_name VARCHAR(128) NOT NULL,
   customer_email VARCHAR(128) NOT NULL,
@@ -20,9 +20,7 @@ CREATE TABLE cheese (
 );
 CREATE TABLE noodle_shape (
   noodle_shape_id INT AUTO_INCREMENT NOT NULL,
-  macaroni TEXT NOT NULL,
-  rotini TEXT NOT NULL,
-  farfalle TEXT NOT NULL,
+  noodle_shape VARCHAR(128) NOT NULL,
   PRIMARY KEY (noodle_shape_id)
 );
 CREATE TABLE macaroni_orders (
@@ -41,3 +39,4 @@ CREATE TABLE cheese_order (
   FOREIGN KEY (cheese_id) REFERENCES cheese (cheese_id) ON DELETE CASCADE,
   UNIQUE KEY (macaroni_order_id, cheese_id)
 );
+
