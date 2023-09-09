@@ -25,7 +25,7 @@ import macaroni.orders.service.MacaroniOrdersService;
 public class MacaroniOrdersController {
 	@Autowired
 	private MacaroniOrdersService macaroniOrdersService;
-	private org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(MacaroniOrdersController.class);
+	
 
 	@PostMapping("/macaroniOrders")
 	@ResponseStatus(code = HttpStatus.CREATED)
@@ -56,7 +56,7 @@ public class MacaroniOrdersController {
 
 	@DeleteMapping("/{macaroniOrdersId}")
 	public Map<String, String> deleteMacaroniOrderById(@PathVariable Long macaroniOrdersId) {
-		log.info("Deleting order with ID", macaroniOrdersId);
+		log.info("Deleting order with ID ={}", macaroniOrdersId);
 
 		macaroniOrdersService.deleteMacaroniOrdersById(macaroniOrdersId);
 		return Map.of("message", "successful deletion of Macaroni Order Id.");
