@@ -59,14 +59,14 @@ public class MacaroniOrdersService {
 		return new MacaroniOrdersData(macaroniorders);
 	}
 
-	private MacaroniOrders findMacaroniOrdersById(Long macaroniOrdersId) {
-		return macaroniOrdersDao.findById(macaroniOrdersId)
+	private MacaroniOrders findMacaroniOrdersById(Long macaroniOrderId) {
+		return macaroniOrdersDao.findById(macaroniOrderId)
 				.orElseThrow(() -> new NoSuchElementException("Macaroni orders with ID=" + " does not exist."));
 	}
 
 	@Transactional(readOnly = false)
-	public void deleteMacaroniOrdersById(Long macaroniOrdersId) {
-		MacaroniOrders macaroniOrders = findMacaroniOrdersById(macaroniOrdersId);
+	public void deleteMacaroniOrdersById(Long macaroniOrderId) {
+		MacaroniOrders macaroniOrders = findMacaroniOrdersById(macaroniOrderId);
 		macaroniOrdersDao.delete(macaroniOrders);
 	}
 	
@@ -120,9 +120,7 @@ public class MacaroniOrdersService {
 	
 	private Customer copyCustomerDataFields(MacaroniOrdersCustomerData data) {
 		Customer customer = new Customer();
-
 		customer.setCustomerId(data.getCustomerId());
-		customer.setCustomerOrder(data.getCustomerOrder());
 		customer.setCustomerFirstname(data.getCustomerFirstname());
 		customer.setCustomerLastname(data.getCustomerLastname());
 		customer.setCustomerEmail(data.getCustomerEmail());
@@ -130,11 +128,6 @@ public class MacaroniOrdersService {
 		return customer;
 	}
 	
-	private MacaroniOrdersCustomerData copyCustomerFields(macaroni.orders.entity.Customer data) {
-		MacaroniOrdersCustomerData customerData = new MacaroniOrdersCustomerData(data);
-		return customerData;
-	}
-}
 	private MacaroniOrdersCustomerData copyCustomerFields(macaroni.orders.entity.Customer data) {
 		MacaroniOrdersCustomerData customerData = new MacaroniOrdersCustomerData(data);
 		return customerData;
