@@ -19,8 +19,8 @@ public class MacaroniOrdersData {
 	private Set<MacaroniOrdersCustomerData> customers = new HashSet<>();
 
 	public MacaroniOrdersData(MacaroniOrders macaroniOrders) {
-		macaroniOrdersId = macaroniOrders.getMacaroniOrderid();
-		noodleShapeid = macaroniOrders.getNoodleShapeid();
+		macaroniOrdersId = macaroniOrders.getMacaroniOrderId();
+		noodleShapeid = macaroniOrders.getNoodleShapeId();
 
 		herbToppingtype = macaroniOrders.getHerbToppingChoice();
 
