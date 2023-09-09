@@ -16,9 +16,6 @@ public class Customer {
 	@Column(name = "customer_id")
 	Long customerId;
 	
-	@Column(name="customer_order")
-	Long customerOrder;
-	
 	@Column(name="customer_first_name")
 	String customerFirstname;
 	
@@ -27,6 +24,5 @@ public class Customer {
 	
 	@Column(name="customer_email")
 	String customerEmail;
-}
 
 
