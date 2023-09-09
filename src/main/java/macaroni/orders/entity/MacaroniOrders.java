@@ -16,10 +16,10 @@ import lombok.Data;
 @Data
 public class MacaroniOrders {
 	
-	@Id
+		@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long macaroniOrderid;
-	private Long noodleShapeid;
+	private Long macaroniOrderId;
+	private Long noodleShapeId;
 	private String herbToppingChoice;
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
